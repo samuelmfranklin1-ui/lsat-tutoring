@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LSAT Tutoring NYC — 99.5th Percentile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --paper: #f5f2eb;
+      --cream: #ede9df;
+      --accent: #8b4513;
+      --accent-light: #c4793a;
+      --rule: #c8c0b0;
+      --muted: #6b6155;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-top {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-top-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-top-cta a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-top-cta a:hover { color: var(--accent-light); border-color: var(--accent-light); }
+
+    .hero-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 3rem;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 600;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.35s forwards;
+    }
+
+    .hero-title em { font-style: italic; color: var(--accent); }
+
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+      align-items: center;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .stat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: var(--rule);
+      align-self: stretch;
+      min-height: 3rem;
+    }
+
+    .stat-number-hero {
+      font-size: 3.8rem;
+      color: var(--accent);
+    }
+
+    .stat-hero .stat-label {
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border: 1px solid var(--rule);
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-ghost:hover { border-color: var(--ink); }
+
+    .hero-bottom {
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--rule);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    section {
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin: 0;
+    }
+
+    /* ── WHY YOUR SCORE MATTERS ── */
+    .stakes-bg {
+      background: var(--cream);
+      padding: 6rem 0;
+    }
+
+    .stakes-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .stakes-intro {
+      max-width: 680px;
+      margin-bottom: 3.5rem;
+    }
+
+    .stakes-intro p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-top: 1.2rem;
+    }
+
+    .stakes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Center the lone third card when grid collapses to 2 columns */
+    @media (max-width: 1000px) and (min-width: 601px) {
+      .stakes-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .stakes-card:nth-child(1) { grid-column: 1 / 3; }
+      .stakes-card:nth-child(2) { grid-column: 3 / 5; }
+      .stakes-card:nth-child(3) { grid-column: 2 / 4; }
+    }
+
+    .stakes-card {
+      background: var(--paper);
+      padding: 2.5rem 2rem;
+    }
+
+    .stakes-stat {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .stakes-card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .stakes-card-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .stakes-callout {
+      background: var(--ink);
+      padding: 2.8rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .stakes-callout-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--paper);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .stakes-callout-text strong {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .stakes-source {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,242,235,0.35);
+      margin-top: 1rem;
+      font-style: normal;
+      display: block;
+    }
+
+    .stakes-callout-cta { flex-shrink: 0; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-body p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-credentials {
+      background: var(--cream);
+      padding: 2.5rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .credential-item {
+      display: flex;
+      flex-direction: column;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .credential-item:last-child { border-bottom: none; }
+
+    .credential-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .credential-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-bg {
+      background: var(--ink);
+      padding: 6rem 0;
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .how-bg .section-label { color: var(--accent-light); }
+    .how-bg .section-title { color: var(--paper); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 3.5rem;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .step {
+      padding: 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+    .step:hover { background: rgba(255,255,255,0.04); }
+
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--paper);
+      margin-bottom: 0.8rem;
+    }
+
+    .step-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(245,242,235,0.6);
+      line-height: 1.75;
+    }
+
+    /* Step 04 subtle accent treatment */
+    .step-accent {
+      background: rgba(139,69,19,0.12);
+      border-right-color: rgba(196,121,58,0.25) !important;
+    }
+    .step-accent:hover { background: rgba(139,69,19,0.2); }
+    .step-accent .step-number { color: rgba(196,121,58,0.2); }
+    .step-accent .step-title { color: var(--accent-light); }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      margin-top: 3.5rem;
+      border: 1px solid var(--rule);
+    }
+
+    .price-card {
+      background: var(--paper);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .price-card:hover { background: var(--cream); }
+    .price-card.featured { background: var(--ink); }
+    .price-card.featured:hover { background: #2a2a2a; }
+
+    .price-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .price-card.featured .price-tag { color: var(--accent-light); }
+
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .price-card.featured .price-amount { color: var(--paper); }
+
+    .price-unit {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .price-card.featured .price-unit { color: rgba(245,242,235,0.5); }
+
+    .price-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .price-card.featured .price-name { color: var(--paper); }
+
+    .price-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .price-card.featured .price-desc { color: rgba(245,242,235,0.5); }
+
+    .referral-note {
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      background: var(--cream);
+      border-left: 3px solid var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .referral-note strong { color: var(--ink); font-weight: 500; }
+
+    /* ── FAQ ── */
+    .faq-list {
+      margin-top: 3rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--rule);
+      padding: 2rem 0;
+    }
+
+    .faq-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--cream);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      text-align: center;
+      padding: 7rem 3rem;
+    }
+
+    .cta-section .section-title { font-size: clamp(2.8rem, 6vw, 5.5rem); }
+    .cta-section .section-title em { font-style: italic; color: var(--accent); }
+
+    .cta-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 1.5rem auto 3rem;
+      max-width: 440px;
+      line-height: 1.8;
+    }
+
+    .cta-price-note {
+      margin-top: 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-left {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-right {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .footer-right a { color: var(--accent); text-decoration: none; }
+    .footer-right a:hover { text-decoration: underline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-stats { gap: 1.5rem; }
+      .stakes-callout { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-top { padding: 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .hero-center { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .stakes-grid { grid-template-columns: 1fr; }
+      .stakes-inner { padding: 0 1.5rem; }
+      .how-inner { padding: 0 1.5rem; }
+      .stakes-callout { padding: 2rem 1.5rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-ghost { text-align: center; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-top-label">LSAT Tutoring &nbsp;·&nbsp; New York City &nbsp;·&nbsp; Summer 2026</span>
+      <div class="hero-top-cta"><a href="#book">Book a session →</a></div>
+    </div>
+
+    <div class="hero-center">
+      <p class="hero-eyebrow">99.5th Percentile &nbsp;·&nbsp; Incoming T-3 Law Student</p>
+      <h1 class="hero-title">Score<br><em>higher.</em></h1>
+      <p class="hero-sub">Private 1-on-1 LSAT tutoring in NYC. In-person or remote. Customized to fit your strengths, weaknesses, and needs.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">T-3</div>
+          <div class="stat-label">Law School Admit</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat stat-hero">
+          <div class="stat-number stat-number-hero">177</div>
+          <div class="stat-label">LSAT Score</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-number">$40</div>
+          <div class="stat-label">First Session</div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#book" class="btn-primary">Book First Session — $40</a>
+        <a href="#how" class="btn-ghost">How It Works</a>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <span class="hero-tagline">Logical Reasoning &amp; Reading Comprehension &nbsp;·&nbsp; Current LSAT Format</span>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- WHY YOUR SCORE MATTERS -->
+  <div class="stakes-bg" id="why">
+    <div class="stakes-inner">
+
+      <div class="stakes-intro reveal">
+        <p class="section-label">Why It Matters</p>
+        <h2 class="section-title">The most important<br>number in your application.</h2>
+        <p>Law school admissions has never been more competitive. Applicant volume is up over 50% in two years, LSAT medians are rising at schools across every tier, and the difference between a good score and a great one can mean six figures in scholarship money — or the difference between your dream school and your safety.</p>
+      </div>
+
+      <div class="stakes-grid reveal">
+        <div class="stakes-card">
+          <div class="stakes-stat">+50%</div>
+          <div class="stakes-card-title">Applicant Volume</div>
+          <div class="stakes-card-body">Law school applicants are up more than 50% compared to the 2023–24 cycle and the current cycle is tracking even higher. The pool is larger and stronger than it's been in a generation — a score that felt competitive two years ago may no longer clear the bar.</div>
+        </div>
+        <div class="stakes-card">
+          <div class="stakes-stat">+1.79 pts</div>
+          <div class="stakes-card-title">Rising Medians</div>
+          <div class="stakes-card-body">The average LSAT median across all ABA-accredited schools rose 1.79 points in a single admissions cycle, with only three schools seeing a decrease. Over the past decade, the average increase is 5 full points. The target keeps moving — and upward.</div>
+        </div>
+        <div class="stakes-card">
+          <div class="stakes-stat">$82k/yr</div>
+          <div class="stakes-card-title">Cost of Law School</div>
+          <div class="stakes-card-body">Average law school cost of attendance now exceeds $82,000 per year. Students who score above a school's 75th percentile LSAT regularly receive half- or full-tuition merit scholarships. A meaningful score improvement can be worth $100,000 or more over three years.</div>
+        </div>
+      </div>
+
+      <div class="stakes-callout reveal">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label">About</p>
+      <h2 class="section-title">The tutor<br>behind the score.</h2>
+    </div>
+    <div class="about-grid" style="margin-top: 3rem;">
+      <div class="about-body reveal">
+        <p>I studied my way to the 99.5th percentile on the LSAT and will be entering a top-3 law school this fall. This summer, I'm offering private 1-on-1 tutoring to students across the score spectrum — whether you're aiming for 160 or pushing for 175+.</p>
+        <p>I work with a limited number of students at a time, which means focused attention, personalized study plans, and real accountability. Every student starts with a full diagnostic so we know exactly where to spend our time.</p>
+        <p style="margin-bottom: 0;">Sessions are available in-person at libraries and cafés across Manhattan and Brooklyn, or remotely via Google Meet.</p>
+      </div>
+      <div class="about-credentials reveal">
+        <div class="credential-item">
+          <span class="credential-value">177</span>
+          <span class="credential-label">LSAT Score &nbsp;·&nbsp; 99.5th Percentile</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-value">T-3</span>
+          <span class="credential-label">Law School Admit &nbsp;·&nbsp; Fall 2026</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-value">1-on-1</span>
+          <span class="credential-label">Private Tutoring Only</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-value">NYC</span>
+          <span class="credential-label">In-Person &amp; Remote</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-bg" id="how">
+    <div class="how-inner">
+      <div class="reveal">
+        <p class="section-label">Process</p>
+        <h2 class="section-title">How it works.</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-number">01</div>
+          <div class="step-title">Diagnostic Session</div>
+          <p class="step-body">We start with a full timed practice test and a detailed review. You'll leave with a clear picture of your strengths, your weaknesses, and a roadmap to your target score.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">02</div>
+          <div class="step-title">Targeted Sessions</div>
+          <p class="step-body">Each session is built around your specific gaps, not a generic curriculum. We drill the question types that cost you the most points — LR, RC, or both, and study the strategies I developed to get to the 99th percentile.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">03</div>
+          <div class="step-title">Track Progress</div>
+          <p class="step-body">After every session I send a brief summary: what we covered, what to practice before next time, and our goals going forward. I'll work with you every step, up until test-day.</p>
+        </div>
+        <div class="step step-accent reveal">
+          <div class="step-number">04</div>
+          <div class="step-title">Admissions Consulting</div>
+          <p class="step-body">Once your score is where it needs to be, I can help you navigate the application itself — school selection, personal statement strategy, and how your numbers will play across different tiers. Drawing on my own experience going through the process to a T-3 admit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="reveal">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">Transparent rates.<br>No surprises.</h2>
+    </div>
+
+    <div class="pricing-grid reveal">
+      <div class="price-card featured">
+        <div class="price-tag">Start Here</div>
+        <div class="price-amount">$40</div>
+        <div class="price-unit">first session only</div>
+        <div class="price-name">First Session</div>
+        <div class="price-desc">Try a full hour at a reduced rate. No commitment required.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-tag">Standard</div>
+        <div class="price-amount">$80</div>
+        <div class="price-unit">per hour</div>
+        <div class="price-name">Single Session</div>
+        <div class="price-desc">60-minute 1-on-1 session. Pay as you go, no package required.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-tag">Save 6%</div>
+        <div class="price-amount">$375</div>
+        <div class="price-unit">$75/hr · 5 sessions</div>
+        <div class="price-name">5-Session Package</div>
+        <div class="price-desc">Ideal for students building a 4–6 week study plan.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-tag">Save 12%</div>
+        <div class="price-amount">$700</div>
+        <div class="price-unit">$70/hr · 10 sessions</div>
+        <div class="price-name">10-Session Package</div>
+        <div class="price-desc">For serious students preparing over a full 10+ week run-up.</div>
+      </div>
+    </div>
+
+    <div class="referral-note reveal">
+      <strong>Referral discount:</strong> Refer a friend and you both get your next session at $60.
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="reveal">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">Common questions.</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">What does the current LSAT cover?</div>
+        <div class="faq-a">As of 2024, the LSAT consists of Logical Reasoning and Reading Comprehension — Logic Games have been permanently removed. My curriculum is fully up to date with the current format and incorporates the strategies I learned and developed during my LSAT journey.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Where do we meet?</div>
+        <div class="faq-a">Your choice. In-person sessions take place at quiet libraries or cafés across Manhattan and Brooklyn. Remote sessions are via Google Meet. Both work equally well — you choose at booking.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How many sessions will I need?</div>
+        <div class="faq-a">Most students I work with do 15–30 sessions over 6–10 weeks. That said, every student is different. After your diagnostic session we'll map out a realistic, specific plan based on your target score and timeline.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What's your cancellation policy?</div>
+        <div class="faq-a">24 hours' notice is required to reschedule or cancel without charge. Cancellations under 24 hours forfeit the session unless we can find an alternative time that week.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Who is this tutoring best for?</div>
+        <div class="faq-a">I work well with students across the score range — from first-time test-takers building foundations to retakers chasing a specific target. If you're serious about the process and willing to put in work between sessions, we'll get along well.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CTA -->
+  <div class="cta-section" id="book">
+    <p class="section-label reveal">Get Started</p>
+    <h2 class="section-title reveal">Ready to<br><em>get to work?</em></h2>
+    <p class="cta-sub reveal">Book your first session at the discounted rate. No commitment, no package required — just an hour to see if this is the right fit.</p>
+    <div class="reveal">
+      <a href="#" class="btn-primary">Book First Session — $40</a>
+      <p class="cta-price-note">Standard rate $80/hr after first session</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">LSAT Tutoring NYC &nbsp;·&nbsp; Summer 2026</div>
+    <div class="footer-right">Questions? <a href="mailto:your@email.com">your@email.com</a></div>
+  </footer>
+
+</body>
+</html>
